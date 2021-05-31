@@ -61,3 +61,7 @@ SELECT name From salesman where name BETWEEN  'A' AND 'K';
 --------------------
 "James Hoog"
 -------------------
+
+
+-- 9. Write a SQL statement to find that customer with all information whose name begin with the letter 'B'. 
+SELECT cust_name From customer where cust_name LIKE   'B%
