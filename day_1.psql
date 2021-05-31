@@ -1,0 +1,63 @@
+-- SQL [22 exercises]
+
+
+-- https://www.w3resource.com/sql-exercises/sql-wildcard-special-operators.php
+
+-- Write a SQL statement to find those salesmen with all information who come from the city either Paris or Rome.
+SELECT name FROM  salesman where city = 'Paris' or city = 'Paris';
+
+----------------------------------------
+"Nail Knite"
+"Mc Lyon"
+----------------------------------------
+
+
+-- Write a query to filter those salesmen with all information who comes from any of the cities Paris and Rome.
+
+-- here I used OR to reduce OR queries 
+
+SELECT name,salesman_id FROM  salesman where city IN ('Paris' , 'Rome');
+-------------------------------------------
+"Nail Knite"	5002
+"Mc Lyon"	    5006
+"Paul Adam"	    5007
+------------------------------------------
+
+-- Write a query to sort out those customers with all information whose ID value is within any of 3007, 3008 and 3009
+SELECT customer_id,cust_name,city,grade FROM  customer where customer_id BETWEEN 3007 AND 3009 ;
+
+-------------------------------------------
+3007	"Brad Davis"	"New York"	200
+3008	"Julian Green"	"London"	300
+3009	"Geoff Cameron"	"Berlin"	100
+-------------------------------------------
+
+-- Write a SQL statement to find those salesmen with all information who gets the commission within a range of 0.12 and 0.14. 
+
+SELECT salesman_id,name,commission FROM  salesman where commission Between  0.12  AND 0.14 order by commission;
+--------------------------------------
+5003	"Lauson Hen"	0.12
+5002	"Nail Knite"	0.13
+5007	"Paul Adam"	    0.13
+5006	"Mc Lyon"	    0.14
+-----------------------------------
+
+
+-- Write a query to filter all those orders with all information which purchase amount value is within the range 
+-- 500 and 4000 except those orders of purchase amount value 948.50 and 1983.43.
+SELECT ord_no ,purch_amt FROM orders WHERE purch_amt BETWEEN 500 AND 4000 AND purch_amt NOT IN (948.50 ,1983.43);
+
+
+--------------------------
+70005	2400.60
+70003	2480.40
+70013	3045.60
+--------------------------
+
+-- Write a SQL statement to find those salesmen with all other 
+-- information and name started with any letter within 'A' and 'K'
+
+SELECT name From salesman where name BETWEEN  'A' AND 'K';
+--------------------
+"James Hoog"
+-------------------
