@@ -1,0 +1,107 @@
+
+--https://www.w3resource.com/sql-exercises/sql-wildcard-special-operators.php
+
+
+-- Write a SQL statement to find those salesmen with
+-- all other information and name started with other than any latter within 'A' and 'L'\
+
+SELECT name From saleSman where name  not Between 'A'  AND 'L';
+
+-----------------------------
+"Nail Knite"
+"Pit Alex"
+"Mc Lyon"
+"Paul Adam"
+"Lauson Hen"
+-----------------------------
+
+--Write a SQL statement to find that customer with all information whose name begin with the letter 'B.
+SELECT cust_name from customer where cust_name LIKE 'B%';
+
+----------------------
+"Brad Davis"
+"Brad Guzan"
+----------------------
+
+--Write a SQL statement to find all those customers with all information whose names are ending with the letter 'n'
+
+SELECT cust_name from customer where cust_name LIKE '%n';
+
+-------------------------
+"Julian Green"
+"Fabian Johnson"
+"Geoff Cameron"
+"Brad Guzan"
+-------------------------
+-- Write a SQL statement to find those salesmen with all information whose name containing the 1st character is 'N' and the 4th character
+-- is 'l' and rests may be any character.
+SELECT name From salesman WHERE name LIKE 'N__l%';
+
+----------------
+"Nail Knite"
+----------------
+SELECT name From salesman WHERE name LIKE 'N%e';
+--Gives name starting with N and ending with e
+
+----------------
+"Nail Knite"
+----------------
+
+-- Write a SQL statement to find those rows from the table testtable which contain the character ( % ) in its column 'col1'.
+
+SELECT col1 FROM testtable WHERE col1 LIKE '%/%%' ESCAPE '/';
+
+----------------------------
+"A001/DJ-402%45\2015/200"
+"A001/DJ_402\45\2015%100"
+"A001/DJ_402%45\2015/300"
+----------------------------
+
+--Write a SQL statement to find those rows from the table testtable which contain the escape character ( / ) in its column 'col1'.
+
+SELECT col1 FROM testtable WHERE col1 LIKE '%//%' ESCAPE '/';
+
+------------------------------------
+"A001/DJ-402\44_/100/2015"
+"A001_\DJ-402\44_/100/2015"
+"A001/DJ_401"
+"A001/DJ_402\44"
+"A001/DJ_402\44\2015"
+"A001/DJ-402%45\2015/200"
+"A001/DJ_402\45\2015%100"
+"A001/DJ_402%45\2015/300"
+"A001/DJ-402\44"
+------------------------------------
+
+--Write a SQL statement to find those rows from the table testtable
+--which does not contain the escape character ( / ) in its column 'col1'.
+
+SELECT col1 FROM testtable WHERE col1 NOT LIKE '%//%' ESCAPE '/';
+
+
+
+-- Write a SQL statement to find those rows from the table testtable which contain the string ( _/ ) in its column 'col1'.
+
+
+SELECT col1 FROM testtable WHERE col1 LIKE '%/_//%' ESCAPE '/';
+--------------------------------
+"A001/DJ-402\44_/100/2015"
+"A001_\DJ-402\44_/100/2015"
+-------------------------------
+
+-- Write a SQL statement to find that customer with all information who does not get any grade except NULL.
+
+SELECT cust_name FROM customer WHERE grade IS  NULL;
+
+-------------------
+"Brad Guzan"
+-------------------
+
+-- Write a query in SQL to display all the data of employees whose
+-- last name begins with an 'D'.
+SELECT EMP_FNAME || ' ' || EMP_LNAME FROM emp_details where EMP_LNAME LIKE 'D%';
+
+---------------------
+"Enric  Dosio"
+"Joseph  Dosni"
+---------------------
