@@ -1,0 +1,47 @@
+--https://www.w3resource.com/sql-exercises/sql-boolean-operators.php
+
+-- Write a query to display all customers with a grade above 100.
+
+SELECT cust_name,grade From customer Where grade >100;
+------------------------
+"Brad Davis"	200
+"Graham Zusi"	200
+"Julian Green"	300
+"Fabian Johnson"300
+"Jozy Altidor"	200
+------------------------
+--Write a query statement to display all customers in New York who have a grade value above 100.
+select cust_name , city From customer where city = 'New York' and grade >100;
+--Tip Use '' instead of  ""
+
+"Brad Davis"	"New York"
+
+
+-- Write a SQL statement to display all customers,
+--who are either belongs to the city New York or had a grade above 100.
+
+select cust_name , city From customer where city = 'New York' OR grade >100;
+
+--------------------------------
+"Nick Rimando"	"New York"
+"Brad Davis"	"New York"
+"Graham Zusi"	"California"
+"Julian Green"	"London"
+"Fabian Johnson" "Paris"
+"Jozy Altidor"	"Moscow"
+-------------------------------
+--Write a SQL statement to display all the customers, who are either belongs to the city New York or not had a grade above 100.
+select cust_name , city From customer where city = 'New York' OR nOT grade <100;
+"Nick Rimando"	"New York"
+"Brad Davis"	"New York"
+"Graham Zusi"	"California"
+"Julian Green"	"London"
+"Fabian Johnson"	"Paris"
+"Geoff Cameron"	"Berlin"
+"Jozy Altidor"	"Moscow"
+
+
+--Write a SQL query to display those customers who are neither
+--belongs to the city New York nor grade value is more than 100
+select cust_name , city,grade From customer where city != 'New York' OR nOT grade >100;
+
