@@ -6,6 +6,9 @@
 -- all other information and name started with other than any latter within 'A' and 'L'\
 
 SELECT name From saleSman where name  not Between 'A'  AND 'L';
+--OR
+SELECT name From saleSman where name  not LIKE '[%A-L%]';
+-- Above one gives same query but with use of regex
 
 -----------------------------
 "Nail Knite"
