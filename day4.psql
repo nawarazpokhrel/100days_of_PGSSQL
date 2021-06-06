@@ -1,0 +1,130 @@
+https://www.w3resource.com/sql-exercises/sql-joins-exercises.php
+-- Write a SQL statement to prepare a list with salesman name,
+-- customer name and their cities for the salesmen and customer who belongs to the same city.
+SELECT s.name,c.cust_name,s.city FROM salesman s INner JOin customer c On s.salesman_id = c.salesman_id where
+s.city = c.city;
+
+"James Hoog"	"Nick Rimando"	  "New York"
+"James Hoog"	"Brad Davis"	  "New York"
+"Mc Lyon"	    "Fabian Johnson"  "Paris"
+"Pit Alex"	    "Brad Guzan"	  "London"
+
+
+--Write a SQL statement to make a list with order no, purchase amount, customer name and
+--their cities for those orders which order amount between 500 and 2000.
+
+select o.ord_no, o.purch_amt, c.cust_name ,c.city FROM orders o Inner Join Customer c
+On o.customer_id = c.customer_id WHERE o.purch_amt BETWEEN 500 AND 2000;
+
+ord_no	purch_amt	cust_name	    city
+70007	948.50		Graham Zusi  	California
+70010	1983.43		Fabian Johnson	Paris
+
+-- Write a SQL statement to know which salesman are working for which customer.
+SELECT s.name,c.cust_name FROM customer c  Inner JOin salesman s On c.salesman_id = s.salesman_id;
+
+"James Hoog"	"Nick Rimando"
+"James Hoog"	"Brad Davis"
+"Nail Knite"	"Graham Zusi"
+"Nail Knite"	"Julian Green"
+"Mc Lyon"	    "Fabian Johnson"
+"Lauson Hen"	 "Geoff Cameron"
+"Paul Adam"	     "Jozy Altidor"
+"Pit Alex"	     "Brad Guzan"
+
+
+-- -- Write a Write a SQL statement to find the list of customers who appointed a salesman
+-- for their jobs who gets a commission from the company is more than 12%
+
+Select c.cust_name , s.commission,s.name From customer c inner join salesman s
+on s.salesman_id = c.salesman_id where s.commission>0.12;
+
+Customer Name	city		Salesman	commission
+Nick Rimando	New York	James Hoog	0.15
+Brad Davis	New York	James Hoog	0.15
+Graham Zusi	California	Nail Knite	0.13
+Julian Green	London		Nail Knite	0.13
+Fabian Johnson	Paris		Mc Lyon		0.14
+Jozy Altidor	Moscow		Paul Adam	0.13
+
+
+-- Write a SQL statement to find the list of customers who appointed a salesman for their jobs who does not live in the same city where their customer lives,
+-- and gets a commission is above 12% .
+
+select c.cust_name ,c.city ,s.commission From customer c inner join salesman s On s.salesman_id = c.salesman_id
+where c.city != s.city and s.commission >0.12;
+
+"Graham Zusi"	"California"	0.13
+"Julian Green"	"London"	    0.13
+"Jozy Altidor"	"Moscow"	    0.130
+
+
+-- Write a SQL statement to make a report with customer name, city, order no. order date, purchase amount for only those customers on the list who must have a grade and placed one or more
+-- orders or which order(s) have been placed by the customer who is neither in the list not have a grade.
+
+Select
+c.cust_name ,
+c.city ,
+o.ord_no,
+o.ord_date,
+o.purch_amt
+FROM customer c
+INner Join orders o
+On c.customer_id = o.customer_id
+WHERE
+c.grade IS NOT NULL ;
+
+cust_name	city		ord_no	ord_date	Order Amount
+Brad Guzan	London		 70009	2012-09-10	270.65
+Nick Rimando	New York	70002	2012-10-05	65.26
+Geoff Cameron	Berlin		70004	2012-08-17	110.50
+Brad Davis	New York	70005	2012-07-27	2400.60
+Nick Rimando	New York	70008	2012-09-10	5760.00
+Fabian Johnson	Paris		70010	2012-10-10	1983.43
+Geoff Cameron	Berlin		70003	2012-10-10	2480.40
+Jozy Altidor	Moscow		70011	2012-08-17	75.29
+Nick Rimando	New York	70013	2012-04-25	3045.60
+Graham Zusi	California	70001	2012-10-05	150.50
+Graham Zusi	California	70007	2012-09-10	948.50
+Julian Green	London		70012	2012-06-27	250.45
+
+
+
+--Write a query in SQL to find the names of departments where more than two employees are working.
+
+
+select (d.DPT_NAME), count(d.DPT_NAME)
+FROM emp_department d
+JOIN emp_details e
+on d.DPT_CODE = e.EMP_DEPT
+GROUP BY
+d.DPT_NAME
+HAVING COUNT(d.DPT_NAME)>2
+;
+
+dpt_name
+Finance
+IT
+HR
+
+
+--Write a query in SQL to find the first name and last name of employees working for departments with a
+--budget more than Rs.50000.
+
+SELECT e.EMP_FNAME ||' '|| e.EMP_LNAME AS " Employee name ", d.DPT_NAME
+FROM emp_department d
+JOin emp_details e
+ON e.EMP_DEPT = d.DPT_CODE
+WHERE d.DPT_ALLOTMENT > 50000;
+
+Employee name	dpt_name
+Alan Snappy	RD
+Maria Foster	IT
+Michale Robbin	IT
+Enric Dosio	IT
+Joseph Dosni	HR
+Zanifer Emily	HR
+Kuleswar Sitaraman	IT
+Henrey Gabriel	HR
+Alex Manuel	IT
+George Mardy	RD
