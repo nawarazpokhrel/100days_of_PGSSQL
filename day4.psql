@@ -128,3 +128,15 @@ Kuleswar Sitaraman	IT
 Henrey Gabriel	HR
 Alex Manuel	IT
 George Mardy	RD
+
+
+-- Write a SQL query to display the name of each company along with the
+-- ID and price for their most expensive product.
+
+-- select * from
+SELECT c.COM_NAME , i.PRO_NAME,MAX(i.PRO_PRICE)
+FROM company_mast c
+Join item_mast i
+on c.COM_ID = i.PRO_COM
+GROUP BY c.COM_NAME, i.PRO_NAME;
+
