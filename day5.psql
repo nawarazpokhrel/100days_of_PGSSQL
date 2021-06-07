@@ -1,0 +1,31 @@
+Write a SQL statement to make a report with customer name, city, order number, order date, and order amount in ascending order according to the order date to find that either any of the existing customers have placed no order or
+placed one or more orders.
+
+SELECT c.cust_name,c.city, o.ord_no,o.ord_date , o.purch_amt
+FROM customer c
+LEFT Join orders o
+On c.customer_id = o.customer_id
+order by o.ord_date
+;
+
+
+"Nick Rimando"	"New York"	70013	"2012-04-25"	3045.60
+"Julian Green"	"London"	70012	"2012-06-27"	250.45
+"Brad Davis"	"New York"	70005	"2012-07-27"	2400.60
+"Jozy Altidor"	"Moscow"	70011	"2012-08-17"	75.29
+"Geoff Cameron"	"Berlin"	70004	"2012-08-17"	110.50
+"Brad Guzan"	"London"	70009	"2012-09-10"	270.65
+"Nick Rimando"	"New York"	70008	"2012-09-10"	5760.00
+"Graham Zusi"	"California"	70007	"2012-09-10"	948.50
+"Graham Zusi"	"California"	70001	"2012-10-05"	150.50
+"Nick Rimando"	"New York"	70002	"2012-10-05"	65.26
+"Fabian Johnson"	"Paris"	70010	"2012-10-10"	1983.43
+"Geoff Cameron"	"Berlin"	70003	"2012-10-10"	2480.40
+
+
+-- Write a SQL statement to make a list in ascending
+-- order for the salesmen who works either for one or
+-- more customer or not yet join under any of the customers.
+SELECT s.name ,c.cust_name FROM customer c
+Right Join  salesman s
+On s.salesman_id = c.salesman_id;
