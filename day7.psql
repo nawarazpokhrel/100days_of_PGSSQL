@@ -1,0 +1,63 @@
+# Joins In SQL And PGSQL
+
+What are SQL Joins?
+
+SQL join statements allow us to access information from two or more tables at once. They also keep our database
+normalized. Normalization allows us to keep data redundancy low so that we can decrease the amount of data
+anomalies in our application when we delete or update a record.
+Link To exeercises.
+
+Types of Join statements
+The type of join statement you use depends on your use case. There are four different types of join operations:
+
+(INNER) JOIN: Returns dataset that have matching values in both tables
+LEFT (OUTER) JOIN: Returns all records from the left table and matched records from the right s
+RIGHT (OUTER) JOIN: Returns all records from the right table and the matched records from the left
+FULL (OUTER) JOIN: Returns all records when there is a match in either the left table or right table
+
+1. Write a query in SQL to find the name of the venue with city where the EURO cup
+2016 final match was played.
+
+	SELECT s.venue_name,c.city
+	FROM soccer_venue s
+	JOIN soccer_city c
+	ON s.city_id=c.city_id
+	JOIN match_mast m
+	on s.venue_id =m.venue_id
+	WHERE m.play_stage='F'
+	;
+
+   venue_name    |    city
+-----------------+-------------
+ Stade de France | Saint-Denis
+
+2.Write a query in SQL to find the number of goal scored by each country
+match within normal play schedule.
+
+SELECT s.country_name,Count(m.goal_score) FROM match_details m
+INner Join soccer_country s
+On s.country_id=m.team_id
+where m.decided_by='N'
+Group BY s.country_name
+;
+
+3.
+Write a query in SQL to
+find the position of a player,contry,player_name  to play who scored own goal.
+
+
+SELECT p.posi_to_play,p.player_name,s.country_name
+FROM player_mast p
+Join goal_details g
+ON p.player_id = g.player_id
+JOIN soccer_country s
+ON p.team_id=s.country_id
+where g.goal_type='O';
+
+4. Find the number of goal_scored by players based on each position.
+
+SELECT p.posi_to_play,COUNT(g.player_id)  from goal_details g
+JOin player_mast p
+ON p.player_id=g.player_id
+Group By p.posi_to_play;
+
