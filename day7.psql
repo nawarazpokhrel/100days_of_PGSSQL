@@ -1,5 +1,6 @@
 # Joins In SQL And PGSQL
-
+Link ->https://www.w3resource.com/sql-exercises/soccer-database-exercise/sql-joins-exercise-soccer-database-60.php
+https://www.w3resource.com/sql-exercises/soccer-database-exercise/sql-joins-exercise-soccer-database-60.php
 What are SQL Joins?
 
 SQL join statements allow us to access information from two or more tables at once. They also keep our database
@@ -14,6 +15,17 @@ The type of join statement you use depends on your use case. There are four diff
 LEFT (OUTER) JOIN: Returns all records from the left table and matched records from the right s
 RIGHT (OUTER) JOIN: Returns all records from the right table and the matched records from the left
 FULL (OUTER) JOIN: Returns all records when there is a match in either the left table or right table
+
+
+
+Aliases are used to give a table, or a column in a table, a temporary name.
+
+Aliases are often used to make column names more readable.
+
+An alias only exists for the duration of that query.
+
+An alias is created with the AS keyword.
+
 
 1. Write a query in SQL to find the name of the venue with city where the EURO cup
 2016 final match was played.
@@ -60,4 +72,60 @@ SELECT p.posi_to_play,COUNT(g.player_id)  from goal_details g
 JOin player_mast p
 ON p.player_id=g.player_id
 Group By p.posi_to_play;
+
+5.
+Write a query in SQL to find the goal scored by the players according to
+their playing position.
+
+
+SELECT p.posi_to_play,COUNT(g.player_id), s.country_name  from goal_details g
+JOin player_mast p
+ON p.player_id=g.player_id
+JOIN soccer_country s
+On p.team_id=s.country_id
+Group By p.posi_to_play, s.country_name
+ORDER BY s.country_name;
+
+6.
+ Write a query in SQL to find the defender who scored goal for his team.
+
+	SELECT p.player_name ,p.posi_to_play, s.country_name FROM player_mast p
+	JOIN soccer_country s
+	On p.team_id=s.country_id
+	JOIN goal_details G
+	ON  g.player_id=p.player_id
+	WHERE
+	p.posi_to_play='DF';
+
+ 7.
+ Count How many Defender scored Goal For Their Nation
+ SELECT COUNT(*) AS "TOTAL DEFENDERS"  FROM (
+	SELECT p.player_name ,p.posi_to_play, s.country_name FROM player_mast p
+	JOIN soccer_country s
+	On p.team_id=s.country_id
+	JOIN goal_details G
+	ON  g.player_id=p.player_id
+	WHERE
+	p.posi_to_play='DF'
+) AS
+"DEFENDER";
+
+
+8.
+Write a query in SQL to find the player of each team who wear jersey number 10.
+
+SELECT p.player_name,p.jersey_no, s.country_name
+FROM player_mast p
+JOIN soccer_country s
+on p.team_id=s.country_id
+WHERE jersey_no=10;
+
+9.
+Write a query in SQL to find the Total   team who wear jersey number 20.
+
+SELECT COUNT(*) AS "TOTAL PALYER WEARING NO 20 JERSEY" FROM (SELECT p.player_name,p.jersey_no, s.country_name
+FROM player_mast p
+JOIN soccer_country s
+on p.team_id=s.country_id
+WHERE jersey_no=20) AS "PLAYER WEARING JERSEY NO 20";
 
