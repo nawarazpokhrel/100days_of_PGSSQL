@@ -1,6 +1,6 @@
 # 100days of PGSSQL
 
-## This Repo is all about my 100days of SQL/PGSQL
+## This Repo is all about my 100days of SQL/PGSQL :grinning:	
 
 ###  Joins In SQL And PGSQL
 
